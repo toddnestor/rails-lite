@@ -4,7 +4,7 @@ require_relative '../lib/router'
 
 # To test out your CSRF protection, go to the new dog form and
 # make sure it works! Alter the form_authenticity_token and see that
-# your server throws an error. 
+# your server throws an error.
 
 class Dog
   attr_reader :name, :owner
@@ -89,5 +89,6 @@ end
 
 Rack::Server.start(
  app: app,
- Port: 3000
+ Port: 3000,
+ Host: '1.2.3.6'
 )
