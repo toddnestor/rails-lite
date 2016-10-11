@@ -4,6 +4,7 @@ class ShowExceptions
   attr_reader :app
 
   def initialize(app)
+    puts "Initializing exceptions"
     @app = app
   end
 
