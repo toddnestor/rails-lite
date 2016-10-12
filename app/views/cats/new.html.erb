@@ -1,0 +1,18 @@
+<form action="/cats" method="POST">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+  <label>
+    Name
+    <input type="text" name="cat[name]" value="">
+  </label>
+
+  <label>
+    Owner
+    <select class="" name="cat[owner_id]">
+      <% @humans.each do |human| %>
+        <option value="<%= human.id %>"><%= human.lname %>, <%= human.fname %></option>
+      <% end %>
+    </select>
+  </label>
+
+  <input type="submit">
+</form>

@@ -4,15 +4,26 @@ require 'active_support/inflector'
 require 'erb'
 require_relative './session'
 require_relative './flash'
+require_relative './sql_object'
 
 class ControllerBase
   attr_reader :req, :res, :params
+  @@protect_from_forgery = false
+
+  def method_missing(name, *args, &prc)
+    if [:new, :index, :update, :destroy, :show, :edit, :create].include?(name)
+      
+    else
+      super
+    end
+  end
 
   # Setup the controller
   def initialize(req, res, params = {})
     @res = res
     @req = req
     @params = params
+    # Dir["app/*.rb"].each {|file| require file }
   end
 
   # Helper method to alias @already_built_response
@@ -41,7 +52,7 @@ class ControllerBase
   # use ERB and binding to evaluate templates
   # pass the rendered html to render_content
   def render(template_name)
-    directory = self.class.name.underscore
+    directory = self.class.name.underscore[0..-12]
     template = "views/#{directory}/#{template_name}.html.erb"
     content = ERB.new(File.read(template)).result(binding)
     self.render_content(content, 'text/html')

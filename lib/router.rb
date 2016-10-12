@@ -25,6 +25,8 @@ class Route
       end
     end
 
+    params = params.merge(req.params)
+
     @class_instance = @controller_class.new(req, res, params)
     @class_instance.invoke_action(@action_name)
   end

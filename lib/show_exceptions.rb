@@ -20,7 +20,7 @@ class ShowExceptions
 
   def render_exception(e)
     @e = e
-    template = File.read('lib/templates/rescue.html.erb')
+    template = File.read( File.dirname(__FILE__) + '/templates/rescue.html.erb')
     template = ERB.new(template)
     ['500', {'Content-type' => 'text/html'}, [template.result(binding)]]
   end
